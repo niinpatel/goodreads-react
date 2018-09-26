@@ -37,6 +37,15 @@ const SearchResult = ({ bookData }) => {
           <p className="text-sm-left card-text">
             {bookData.best_book.author.name}
           </p>
+
+          <a
+            href={`https://www.goodreads.com/book/show/${
+              bookData.best_book.id
+            }`}
+            target="_blank"
+          >
+            More Info >>
+          </a>
         </div>
       </div>
     </div>

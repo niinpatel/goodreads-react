@@ -39,7 +39,7 @@ class App extends Component {
       });
   };
 
-  // parse xml received from goodreads api
+  // parse string xml received from goodreads api
   parseXMLResponse = response => {
     const parser = new DOMParser();
     const XMLResponse = parser.parseFromString(response, "application/xml");
@@ -58,6 +58,8 @@ class App extends Component {
   };
 
   // Function to convert simple XML document into JSON.
+  // Loops through each child and saves it as key, value pair
+  // if there are sub-children, call the same function recursively on its children.
   XMLToJson = XML => {
     const allNodes = new Array(...XML.children);
     const jsonResult = {};
@@ -73,34 +75,39 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container mt-5">
-        <div className="form-group row">
-          <input
-            className="mr-1 col-sm-9 form-control"
-            type="text"
-            placeholder="Search Books By title, author, or ISBN..."
-            name="searchText"
-            onChange={this.onTextChange}
-            value={this.state.searchText}
-          />
-          <button
-            className="col-sm-2 btn btn-primary"
-            onClick={this.onButtonClick}
-          >
-            Search
-          </button>
+      <div className="container">
+        <div className="header clearfix mt-5">
+          <h3 className="text-muted">Goodreads Book Search</h3>
         </div>
+        <div className="jumbotron">
+          <div className="form-group row">
+            <input
+              className="mr-1 col-sm-9 form-control"
+              type="text"
+              placeholder="Search Books By title, author, or ISBN..."
+              name="searchText"
+              onChange={this.onTextChange}
+              value={this.state.searchText}
+            />
+            <button
+              className="col-sm-2 btn btn-primary"
+              onClick={this.onButtonClick}
+            >
+              Search
+            </button>
+          </div>
 
-        {/**
-         * if fetching data, display "loading...", if error, display error message, else display search results
-         */}
-        {this.state.fetchingData ? (
-          <p className="lead text-center">{"loading... "}</p>
-        ) : (
-          (this.state.error && (
-            <p className="text-danger">{this.state.error}</p>
-          )) || <AllResults books={this.state.searchResults} />
-        )}
+          {/**
+           * if fetching data, display "loading...", if error, display error message, else display search results
+           */}
+          {this.state.fetchingData ? (
+            <p className="lead text-center">{"loading... "}</p>
+          ) : (
+            (this.state.error && (
+              <p className="text-danger">{this.state.error}</p>
+            )) || <AllResults books={this.state.searchResults} />
+          )}
+        </div>
       </div>
     );
   }
