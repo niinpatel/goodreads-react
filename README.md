@@ -6,7 +6,7 @@ This project was bootstrapped with `create-react-app` and deployed live at https
 
 # Running the application locally
 
-**Prerequisites:** You need to have Node + NPM or Yarn installed.
+**Prerequisites:** You need to have Node + NPM installed.
 
 **Required Environment Variables:**
 
@@ -28,21 +28,11 @@ Having done that, here is how to run the application locally in development mode
 
     npm start
 
-**Alternatively, you may use `yarn`:**
-
-    yarn install
-
-    yarn start
-
 # Building the application:
 
 To build the production assets, run
 
     npm run build
-
-If you're using Yarn,
-
-    yarn build
 
 # Testing the App:
 
